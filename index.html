@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шахматный тренажёр</title>
+<link rel="stylesheet" href="libs/chessground.base.css">
+<link rel="stylesheet" href="libs/chessground.brown.css">
+<link rel="stylesheet" href="libs/chessground.cburnett.css">
+<link rel="stylesheet" href="style.css?v=202610102227">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2f9e44">
+<link rel="icon" href="icon-192.png">
+</head>
+<body>
+<header>
+  <h1>Шахматный тренажёр</h1>
+  <nav id="tabs">
+    <button data-mode="puzzles" class="on">Задачи</button>
+    <button data-mode="opening">Дебют</button>
+    <button data-mode="spar">Спарринг</button>
+    <label class="toggle" title="Показывать стрелкой ход, который стоит сыграть"><input type="checkbox" id="hints"> Стрелки</label>
+    <a class="navlink" href="dossier.html" target="_blank">Досье ↗</a>
+    <button id="update" class="navlink" title="Скачать новые партии брата и пересчитать досье и задачи">Обновить ↻</button>
+  </nav>
+</header>
+<div id="banner" class="banner" hidden></div>
+
+<main>
+  <section class="board-col">
+    <div class="board-wrap"><div id="board" class="board"></div></div>
+    <div id="status" class="status"></div>
+  </section>
+
+  <section class="panel">
+    <!-- Задачи -->
+    <div id="mode-puzzles" class="mode">
+      <div class="row">
+        <label>Порядок
+          <select id="pz-filter">
+            <option value="vs">Сначала партии против меня</option>
+            <option value="only">Только партии против меня</option>
+            <option value="all">Все подряд (по частоте)</option>
+          </select>
+        </label>
+      </div>
+      <div id="pz-info" class="card"></div>
+      <div class="row buttons">
+        <button id="pz-hint">Подсказка</button>
+        <button id="pz-show">Показать ответ</button>
+        <button id="pz-next" class="primary">Следующая →</button>
+      </div>
+      <div id="pz-stats" class="stats"></div>
+    </div>
+
+    <!-- Дебют -->
+    <div id="mode-opening" class="mode" hidden>
+      <div class="row">
+        <label>Я играю
+          <select id="op-color">
+            <option value="black">чёрными — индийская схема</option>
+            <option value="white">белыми — итальянская партия</option>
+            <option value="london">чёрными — против Лондона (…d5 и Bf5)</option>
+            <option value="london_white">белыми — Лондонская система</option>
+          </select>
+        </label>
+      </div>
+      <div id="op-info" class="card"></div>
+      <div id="op-why" class="card why" hidden></div>
+      <div id="op-moves" class="moves"></div>
+      <div class="row buttons">
+        <button id="op-check" class="primary" hidden>Проверить себя без стрелок</button>
+        <button id="op-restart">Заново эту линию</button>
+        <button id="op-next" class="primary">Следующая линия →</button>
+      </div>
+      <div id="op-stats" class="stats"></div>
+    </div>
+
+    <!-- Спарринг -->
+    <div id="mode-spar" class="mode" hidden>
+      <div class="row">
+        <label>Я играю
+          <select id="sp-color">
+            <option value="black">чёрными</option>
+            <option value="white">белыми</option>
+            <option value="random">случайно</option>
+          </select>
+        </label>
+        <label>Сила вне книги
+          <select id="sp-level">
+            <option value="700">~700</option>
+            <option value="900">~900</option>
+            <option value="1100">~1100</option>
+            <option value="1300">~1300</option>
+          </select>
+        </label>
+      </div>
+      <div id="sp-info" class="card"></div>
+      <div id="sp-moves" class="moves"></div>
+      <div class="row buttons">
+        <button id="sp-undo">Взять ход назад</button>
+        <button id="sp-resign">Сдаться</button>
+        <button id="sp-new" class="primary">Новая партия</button>
+      </div>
+      <div id="sp-stats" class="stats"></div>
+    </div>
+
+    <footer>
+      <span id="gen"></span>
+      <button id="reset" class="link">Сбросить прогресс</button>
+    </footer>
+  </section>
+</main>
+
+<script src="libs/chess.js"></script>
+<script src="libs/chessground.min.js"></script>
+<script src="data.js?v=202610102227"></script>
+<script src="arrows.js?v=202610102227"></script>
+<script src="app.js?v=202610102227"></script>
+<script src="spar.js?v=202610102227"></script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+</body>
+</html>
